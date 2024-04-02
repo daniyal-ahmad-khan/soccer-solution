@@ -11,6 +11,8 @@ ADD https://github.com/ultralytics/assets/releases/download/v0.0.0/Arial.ttf \
     https://github.com/ultralytics/assets/releases/download/v0.0.0/Arial.Unicode.ttf \
     /root/.config/Ultralytics/
 
+
+
 # Install linux packages
 # g++ required to build 'tflite_support' and 'lap' packages, libusb-1.0-0 required for 'tflite_support' package
 RUN apt update \
@@ -44,7 +46,7 @@ RUN pip install --no-cache numpy==1.23.5
 RUN rm -rf tmp
 
 # Set environment variables
-ENV OMP_NUM_THREADS=16
+ENV OMP_NUM_THREADS=8
 # Avoid DDP error "MKL_THREADING_LAYER=INTEL is incompatible with libgomp.so.1 library" https://github.com/pytorch/pytorch/issues/37377
 ENV MKL_THREADING_LAYER=GNU
 
@@ -55,31 +57,23 @@ RUN apt-get update && apt-get install -y \
     git \
  && rm -rf /var/lib/apt/lists/*
 
-
+WORKDIR /app
 # Copy the local React dashboard repository into the Docker image
-COPY Soccer-Analysis-Dashboard /app/react-app
-
-# Copy the local Python script repository into the Docker image
-COPY soccer-players-analysis /app/python-app
+RUN git clone https://github.com/daniyal-ahmad-khan/soccer-solution.git
 
 
 # Install dependencies for the React dashboard
-WORKDIR /app/react-app
+WORKDIR /app/soccer-solution/frontend
 RUN npm install
+WORKDIR /app/soccer-solution
 RUN pip3 install websockets
 # Expose the port for the React dashboard
 EXPOSE 3000
 
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
 
-# Set the working directory to /app
-WORKDIR /app
-COPY start.sh /app/start.sh
-RUN chmod +x /app/start.sh
+RUN chmod +x /app/soccer-solution/entrypoint.sh
+RUN chmod +x /app/soccer-solution/start.sh
 
 # Set the entrypoint script to be executed
-ENTRYPOINT ["/app/entrypoint.sh"]
-
-
+ENTRYPOINT ["/app/soccer-solution/entrypoint.sh"]
 
