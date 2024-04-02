@@ -1,12 +1,10 @@
 # soccer-solution
 
-This guide walks you through setting up the necessary environment on Windows to run the project, including Docker, Windows Subsystem for Linux (WSL), and NVIDIA drivers. It also includes instructions for cloning the repository and starting the backend, which will convert `.pt` weights to TensorRT `.engine` format for efficient execution.
-
 ## Prerequisites
 
 Before proceeding, ensure your Windows system meets the following requirements:
 
-- Windows 10 or later, with the latest updates installed.
+- Windows 10 or later.
 - Hardware support for virtualization.
 - NVIDIA GPU with the latest NVIDIA drivers installed.
 
@@ -22,7 +20,6 @@ WSL allows you to run a Linux distribution alongside your Windows installation. 
     ```
 2. Restart your computer when prompted.
 
-3. Open the Microsoft Store, search for your preferred Linux distribution (e.g., Ubuntu), and click "Install".
 
 ### 2. Set up NVIDIA GPU with WSL
 
@@ -51,4 +48,4 @@ docker-compose up --build
 ```
 
 #### Note on Backend Initialization
-The first time you start the backend, it will take some time to initialize. This delay is due to the conversion of .pt weights to TensorRT .engine format. This conversion is necessary because .engine weights are optimized for the CUDA version and operating system they are generated on, ensuring optimal performance for your application.
+The first time you start the docker the backend initialization, will take some time to initialize. This delay is due to the conversion of .pt weights to TensorRT .engine format. This conversion is necessary because .engine weights are optimized for the CUDA version and operating system they are generated on, ensuring optimal performance.
