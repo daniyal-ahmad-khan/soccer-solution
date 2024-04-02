@@ -1,15 +1,11 @@
 #!/bin/bash
 
-# Start the React dashboard in the background
-cd frontend
-npm start &
+# Navigate to the correct directory
+cd /app/Models/yolov8-demo-model/train/weights/nano
 
-# Ensure the React server has time to start
-sleep 10
+# Perform the GPU-dependent operation
+yolo export model=best.pt format=engine device=0
 
-# Navigate to the Python script directory and run the Python script
-cd ../Usage/soccer-demo/src
+# Continue with the original startup commands
+cd /app/Usage/soccer-demo/src
 python3 main.py
-
-# Keep the container running (optional, uncomment if needed)
-# tail -f /dev/null
