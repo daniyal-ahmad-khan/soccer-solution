@@ -363,6 +363,7 @@ class HomographySetup:
     def load_and_prepare_images(self):
         layout_img = cv2.imread(self.config['input_layout_image'])
         cap = cv2.VideoCapture(self.config['input_video_path'])
+        print(self.config['input_video_path'])
         ret, frame = cap.read()
         cap.release()
 
