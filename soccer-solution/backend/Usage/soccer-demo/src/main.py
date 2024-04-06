@@ -1234,7 +1234,7 @@ if __name__ == "__main__":
     parser.add_argument('--ball_labels', nargs='+', type=int, default=[1], help='Ball labels')
     parser.add_argument('--n_classes', type=int, default=2, help='Number of classes')
     parser.add_argument('--input_layout_image', type=str, default='../../../Datasets/soccer field layout/soccer_field_layout.png', help='Path to input layout image')
-    parser.add_argument('--yolo_model_path', type=str, default='../../../Models/yolov8-demo-model/train/weights/nano/best.engine', help='Path to YOLO model')
+    parser.add_argument('--yolo_model_path', type=str, default='../../../Models/yolov8-demo-model/train/weights/nano/best.pt', help='Path to YOLO model')
     parser.add_argument('--output_base_dir', type=str, default='../outputs', help='Base directory for outputs')
 
     # Parse the arguments
